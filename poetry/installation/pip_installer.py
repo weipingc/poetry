@@ -1,6 +1,7 @@
 import os
 import shutil
 import tempfile
+from io import open
 
 from subprocess import CalledProcessError
 
@@ -193,7 +194,7 @@ class PipInstaller(BaseInstaller):
             # We also need it for non-PEP-517 packages
             builder = SdistBuilder(Poetry.create(pyproject.parent), NullEnv(), NullIO())
 
-            with open(setup, "w") as f:
+            with open(setup, "w", encoding="utf-8") as f:
                 f.write(decode(builder.build_setup()))
 
         if package.develop:
